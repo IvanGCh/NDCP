@@ -7,7 +7,8 @@ INPUT FILES:
 
 NDCP handles data in SAC format (https://ds.iris.edu/files/sac-manual/manual/file_format.html ). 
 Data must be placed in a same folder.
-SAC header must contain Station and Event information (latitude, longitude, origin time of the record and of the earthquake if the case)
+SAC header must contain Station and Event information (latitude, longitude, origin time of the record and of the earthquake if the case).
+To avoid border effects at long periods filtering (for earthquakes records), we suggest to add a broad time window (around 20% of the earthquake duration), before and after the seismogram.
 
 
 TO RUN NDCP:
@@ -29,7 +30,7 @@ width (log(s)) length of the filter window
 filter order: 
 Cut signal: option to select a subset of the displayed data (put nothing if the whole signal is kept)
 
-Default values are automatically calculated depending on the station-station or event-station interdistance. User can modify it if needed.
+Default values are automatically calculated depending on the station-station or event-station interdistance.
 
 
 Once the parameters are defined, NDCP will calculate and display the FTAN analysis for each record:
@@ -59,7 +60,7 @@ Upon all curves are picked and saved, the button ÒEXPORT ALL CURVESÓ writes a 
 	
 	
 To cite NDCP:
-Granados, I., Cal˜, M., and Ramos, V. (2018). NOISY DISPERSION CURVE PICKING (NDCP): a Matlab package for group velocity dispersion picking of seismic surface waves. 
+Granados, I., Calo, M., and Ramos, V. (2018). NOISY DISPERSION CURVE PICKING (NDCP): a Matlab package for group velocity dispersion picking of seismic surface waves. 
 Submitted to "Computer and Geosciences".
 
 Comments and remarks can be sent to IGranadosC@igeofisica.unam.mx
