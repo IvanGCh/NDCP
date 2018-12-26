@@ -8,7 +8,7 @@ INPUT FILES:
 NDCP handles data in SAC format (https://ds.iris.edu/files/sac-manual/manual/file_format.html ). 
 Data must be placed in a same folder.
 SAC header must contain Station and Event information (latitude, longitude, origin time of the record and of the earthquake if the case).
-To avoid border effects at long periods filtering (for earthquakes records), we suggest to add a broad time window (around 20% of the earthquake duration), before and after the seismogram.
+To avoid border effects at long periods filtering (especially for earthquakes records), we suggest to add a broad time window (around 20-30% of the earthquake duration), before and after the seismogram.in the case of CC data, a lag time of at least three times the expected arrival time of surface waves is suggested.
 
 
 TO RUN NDCP:
@@ -23,12 +23,12 @@ When a file is selected, NDCP reads and displays the Waveform and Amplitude Spec
 pre-defined FTAN parameters:
 Distance (km): directly read from the SAC HEADER
 
-Tmin (s): minimum period to be analyzed 
-T max (s): maximum period to be analyzed
-fstep log(s)): step (distance in seconds) between two consecutive filters 
-width (log(s)) length of the filter window 
-filter order: 
-Cut signal: option to select a subset of the displayed data (put nothing if the whole signal is kept)
+Tmin (s): 	minimum period to be analyzed 
+T max (s): 	maximum period to be analyzed
+fstep log(s): 	step (distance in seconds) between two consecutive filters 
+width log(s) 	length of the filter window 
+filter order: 	order of Butterworth filter
+Cut signal(s): 	option to select a subset of the displayed data (put nothing if the whole signal is kept)
 
 Default values are automatically calculated depending on the station-station or event-station interdistance.
 
@@ -63,5 +63,5 @@ To cite NDCP:
 Granados, I., Calo, M., and Ramos, V. (2018). NOISY DISPERSION CURVE PICKING (NDCP): a Matlab package for group velocity dispersion picking of seismic surface waves. 
 Submitted to "Computer and Geosciences".
 
-Comments and remarks can be sent to IGranadosC@igeofisica.unam.mx
+Comments and remarks can be sent to igranadosc@igeofisica.unam.mx
 
