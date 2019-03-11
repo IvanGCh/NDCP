@@ -4,7 +4,7 @@ function f_NextDC(hObject, eventdata, handles)
 %               distance, cut signal (if it is a cross-correlogram), and
 %               perform FTAN.
 %               At the end, on the visualization step, user can select
-%               which part of the FG will be picked (causal or non-causal).
+%               which part of the FG will be picked (causal or anticausal).
 
     nsac= evalin('base', 'nsac');
     kreg= evalin('base', 'kreg');
@@ -91,7 +91,7 @@ function f_NextDC(hObject, eventdata, handles)
         f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
         
         uicontrol('Style','text','String',' PART OF CC TO PICK ','background','w','FontSize',fontesc10,'Units','normalized','Position',[0.5 0.955 0.1 0.03])  
-        uicontrol('Style','popup','String', 'CONTINUOUS CAUSAL|CONTINUOUS NON-CAUSAL|SEGMENTED  CAUSAL|SEGMENTED  NON-CAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.6 0.935 0.10 0.05],'Callback', @f_SelectCausal2);   
+        uicontrol('Style','popup','String', 'CONTINUOUS CAUSAL|CONTINUOUS ANTICAUSAL|SEGMENTED  CAUSAL|SEGMENTED  ANTICAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.6 0.935 0.10 0.05],'Callback', @f_SelectCausal2);   
 
         uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position', [0.8,0.96,0.08,0.03]);
         uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position', [0.89,0.96,0.1,0.03]);
