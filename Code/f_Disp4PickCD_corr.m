@@ -54,12 +54,12 @@ function f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel)
     title(['\bf FTAN Dist. ',num2str(dist),' [km]'])
     set(gca,'YTick',1:length(ejeT),'YTickLabel',ejeT)
 	    
-    % VELOCITYvsPERIOD DIAGRAM (NON-CAUSAL)
+    % VELOCITYvsPERIOD DIAGRAM (ANTICAUSAL)
     subplot(3,4,11),cla,hold off,colormap(colorRB)
     pcolor(logTT,VEL,ENVTn'),shading interp
     set(gca,'XTick',Tlog_tick,'XTickLabel',ejeT2,'fontsize',fontesc10)
     xlabel('\bf PERIOD [s]'),ylabel('\bf GROUP VELOCITY [km/s]')
-    title('\bf NON-CAUSAL DISPERSION CURVE ')
+    title('\bf ANTICAUSAL DISPERSION CURVE ')
     axis([min(log10(T)) max(log10(T)) minvel maxvel])
     
     % VELOCITYvsPERIOD DIAGRAM (CAUSAL)  
