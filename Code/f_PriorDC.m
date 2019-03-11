@@ -4,7 +4,7 @@ function f_PriorDC(hObject, eventdata, handles)
 %               distance, cut signal (if it is a cross-correlogram), and
 %               perform FTAN.
 %               At the end, on the visualization step, user can select
-%               which part of the FG will be picked (causal or non-causal).
+%               which part of the FG will be picked (causal or anticausal).
 
     nsac= evalin('base', 'nsac');
     kreg= evalin('base', 'kreg');
