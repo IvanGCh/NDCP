@@ -41,7 +41,7 @@ Once the parameters are defined, NDCP will calculate and display the FTAN analys
 
 PICKING OF THE DISPERSION CURVE:
 
-1) let click on PICKING OF DISPERSION CURVE BUTTON. In the case of cross correlation data, user has to select the part of the signal to be picked (causal or non causal). for CC data users can pick, only one branch or both by selecting them one per time. If user needs to modify the picking, can do it just selecting once again the button ÒPICKING OF DISPERSION CURVE BUTTONÓ ( for records) or causal/non causal ( for cross correlations)
+1) let click on PICKING OF DISPERSION CURVE BUTTON. In the case of cross correlation data, user has to select the part of the signal to be picked (causal or non causal). for CC data users can pick, only one branch or both by selecting them one per time. If user needs to modify the picking, can do it just selecting once again the button 'PICKING OF DISPERSION CURVE BUTTON' ( for records) or causal/anticausal (for cross correlations)
 2) let click and hold the cursor on the FTAN envelopes (top right box); then release it only at the end of the picking.
 3) let click on SAVE CURVE to keep the result on the workspace.
 4) let Click PREVIOUS or NEXT button to analyze the next or the previous data.
