@@ -54,8 +54,8 @@ fontesc16=round(16*sqrt(respix(3)^2+respix(4)^2)/2202);
 figure
 set(gcf,'color',[1,1,1],'Units','normalized','Units','normalized','Position',[0.2,0.35,0.6,0.4])
 uicontrol('Style','text',      'Units','normalized','Position',[0.03 0.85 0.27 0.1],'String',' SELECT TYPE OF DATA TO ANALYZE:','FontSize',fontesc12)
-uicontrol('Style','pushbutton','Units','normalized','Position',[0.35 0.85 0.2 0.1],'String','CROSS-CORRELOGRAM','FontSize',fontesc12,'Callback', {@f_OPEN_CORRELOGRAM} );      
-uicontrol('Style','pushbutton','Units','normalized','Position',[0.6 0.85 0.2 0.1],'String','SEISMIC RECORD','FontSize',fontesc12,'Callback', {@f_OPEN_SEISMIC_RECORD} );
+uicontrol('Style','pushbutton','Units','normalized','Position',[0.35 0.85 0.2 0.1] ,'String','CROSS-CORRELOGRAM','FontSize',fontesc12,'Callback', {@f_OPEN_CORRELOGRAM} );      
+uicontrol('Style','pushbutton','Units','normalized','Position',[0.6 0.85 0.2 0.1]  ,'String','SEISMIC RECORD','FontSize',fontesc12,'Callback', {@f_OPEN_SEISMIC_RECORD} );
 uicontrol('Style','pushbutton','Units','normalized','Position',[0.85 0.85 0.12 0.1],'String','CONTINUE','FontSize',fontesc12,'Callback','uiresume(gcbf)');
 uiwait(gcf);  
 close
@@ -123,7 +123,7 @@ xlim([min(freq) max(freq)]),xlabel('\bf FREQUENCY [Hz]')
     
 %% FTAN PARAMETERS
 % At each interstation/epicentral distance, NDCP proposes some
-% parameters empircially optimized for the FTAN. User can test different vaules to
+% parameters empirically optimized for the FTAN. User can test different values to
 % ensure the best emergence of the Surface wave dispersion pattern.
 if      dist<15
     defFTAN=[0.2,4,0.025,0.07,8];
@@ -255,7 +255,7 @@ vel=dist./time;
 if strcmp(filetype,'correlogram')==1 
     f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
     uicontrol('Style','text','String',' PART OF CC TO PICK ','background','w','FontSize',fontesc10,'Units','normalized','Position',[0.5 0.955 0.1 0.03])  
-    uicontrol('Style','popup','String', 'CONTINUOUS CAUSAL|CONTINUOUS NON-CAUSAL|SEGMENTED  CAUSAL|SEGMENTED  NON-CAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.6 0.935 0.10 0.05],'Callback', @f_SelectCausal2);   
+    uicontrol('Style','popup','String', 'CONTINUOUS CAUSAL|CONTINUOUS ANTICAUSAL|SEGMENTED  CAUSAL|SEGMENTED  ANTICAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.6 0.935 0.10 0.05],'Callback', @f_SelectCausal2);   
     uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position', [0.8,0.96,0.08,0.03]);
     uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position', [0.89,0.96,0.1,0.03]);
 
