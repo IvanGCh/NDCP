@@ -41,13 +41,13 @@ Once the parameters are defined, NDCP will calculate and display the FTAN analys
 
 PICKING OF THE DISPERSION CURVE:
 
-1) let click on PICKING OF DISPERSION CURVE BUTTON. In the case of cross correlation data, user has to select the part of the signal to be picked (causal or non causal). for CC data users can pick, only one branch or both by selecting them one per time. If user needs to modify the picking, can do it just selecting once again the button 'PICKING OF DISPERSION CURVE BUTTON' ( for records) or causal/anticausal (for cross correlations)
+1) let click on PICKING OF DISPERSION CURVE BUTTON. In the case of cross correlation data, user has to select the part of the signal to be picked (causal or anticausal). for CC data users can pick, only one branch or both by selecting them one per time. If user needs to modify the picking, can do it just selecting once again the button 'PICKING OF DISPERSION CURVE BUTTON' ( for records) or causal/anticausal (for cross correlations)
 2) let click and hold the cursor on the FTAN envelopes (top right box); then release it only at the end of the picking.
 3) let click on SAVE CURVE to keep the result on the workspace.
 4) let Click PREVIOUS or NEXT button to analyze the next or the previous data.
 
 EXPORTING PICKED CURVES:
-Upon all curves are picked and saved, the button ÒEXPORT ALL CURVESÓ writes a 4-column ASCII file for each data analyzed in the working folder with the following information:
+Upon all curves are picked and saved, the button EXPORT ALL CURVES writes a 4-column ASCII file for each data analyzed in the working folder with the following information:
 
         name of the file: the same as of the input data (EXAMPLE.txt)
 
@@ -56,9 +56,8 @@ Upon all curves are picked and saved, the button ÒEXPORT ALL CURVESÓ writes a 
 	3rd. col.	Velocity [km/s]
 	4th. col. 	Picked time [s]
 
+Note: in the case of two curves are picked for the same crosscorrelation, two files will be written, one with the suffix 'a' for the picking done on the anticausal part and 'b' for the casual one (e.g. EXAMPLEa.txt and EXAMPLEb.txt)
 
-	
-	
 To cite NDCP:
 Granados, I., Calo, M., and Ramos, V. (2018). NOISY DISPERSION CURVE PICKING (NDCP): a Matlab package for group velocity dispersion picking of seismic surface waves. 
 Submitted to "Computer and Geosciences".
