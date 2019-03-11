@@ -59,7 +59,7 @@ Upon all curves are picked and saved, the button EXPORT ALL CURVES writes a 4-co
 Note: in the case of two curves are picked for the same crosscorrelation, two files will be written, one with the suffix 'a' for the picking done on the anticausal part and 'b' for the casual one (e.g. EXAMPLEa.txt and EXAMPLEb.txt)
 
 To cite NDCP:
-Granados, I., Calo, M., and Ramos, V. (2018). NOISY DISPERSION CURVE PICKING (NDCP): a Matlab package for group velocity dispersion picking of seismic surface waves. 
+Granados, I., Calo, M., and Ramos, V. (2019). NOISY DISPERSION CURVE PICKING (NDCP): a Matlab package for group velocity dispersion picking of seismic surface waves. 
 Submitted to "Computer and Geosciences".
 
 Comments and remarks can be sent to igranadosc@igeofisica.unam.mx
