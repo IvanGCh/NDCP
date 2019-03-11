@@ -57,7 +57,7 @@ function f_SelectCausal2(hObj,event) %#ok<INUSD>
         axis([0 maxlagsel min(log10(fcm)) max(log10(fcm))])
         title('\bf  *** PICK HERE *** '),xlabel('\bf TIME [s]')
         
-    elseif val ==2 || val==4   %% PICKING ON NON-CAUSAL PART
+    elseif val ==2 || val==4   %% PICKING ON ANTICAUSAL PART
         subplot(3,4,[3,7]),cla,hold off
         pcolor(TIME,logFF,ENV'),shading interp,hold on,grid on
         axis([-maxlagsel 0 min(log10(fcm)) max(log10(fcm))])
@@ -129,7 +129,7 @@ function f_SelectCausal2(hObj,event) %#ok<INUSD>
         
     elseif val==2 || val==4
         subplot(3,4,11),cla,hold on
-        title('\bf NON-CAUSAL DISPERSION CURVE')
+        title('\bf ANTICAUSAL DISPERSION CURVE')
         pcolor(logTT,VEL,ENVTn'),shading interp 
     
     end  
