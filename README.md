@@ -24,13 +24,13 @@ pre-defined FTAN parameters:
 Distance (km): directly read from the SAC HEADER
 
 Tmin (s): 	minimum period to be analyzed 
-T max (s): 	maximum period to be analyzed
+Tmax (s): 	maximum period to be analyzed
 fstep log(s): 	step (distance in seconds) between two consecutive filters 
 width log(s) 	length of the filter window 
 filter order: 	order of Butterworth filter
 Cut signal(s): 	option to select a subset of the displayed data (put nothing if the whole signal is kept)
 
-Default values are automatically calculated depending on the station-station or event-station interdistance.
+Default values are automatically calculated depending on the station-station or event-station interdistance. User can modify it if needed.
 
 
 Once the parameters are defined, NDCP will calculate and display the FTAN analysis for each record:
@@ -41,10 +41,13 @@ Once the parameters are defined, NDCP will calculate and display the FTAN analys
 
 PICKING OF THE DISPERSION CURVE:
 
-1) let click on PICKING OF DISPERSION CURVE BUTTON. In the case of cross correlation data, user has to select the part of the signal to be picked (causal or anticausal). for CC data users can pick, only one branch or both by selecting them one per time. If user needs to modify the picking, can do it just selecting once again the button 'PICKING OF DISPERSION CURVE BUTTON' ( for records) or causal/anticausal (for cross correlations)
-2) let click and hold the cursor on the FTAN envelopes (top right box); then release it only at the end of the picking.
-3) let click on SAVE CURVE to keep the result on the workspace.
-4) let Click PREVIOUS or NEXT button to analyze the next or the previous data.
+1) Let choose the picking preference: REPEATED CLICKS (clicking several points) or CLICK&HOLD (one click and hold the mouse).
+2) Let click on PICKING OF DISPERSION CURVE BUTTON. In the case of cross correlation data, user has to select the part of the signal to be picked (causal or anticausal). for CC data users can pick, only one branch or both by selecting them one per time (both curves will be saved). If user needs to modify the picking, can do it just selecting once again the button PICKING OF DISPERSION CURVE BUTTON” ( for records) or causal/non causal ( for cross correlations). by default only one dispersion curve per signal is picked. If the user wants to pick various parts of the same dispersion curve on the same signal, has to select the button “segmented picking”. This option allows the picking of dispersion curves with gaps in the middle or even other parts of the signal (e.g. superior modes etc.).
+3) If REPEATED-CLICKS option was selected, it is requested to the user to pick more than two points on the diagram, and NDCP will interpolate them using b-spline interpolation to create a the continuous curve. once the picking of the desired points is finished let press enter to show the dispersion curve on the FTAN diagram.
+If CLICK&HOLD option was selected, let click and hold the cursor on the FTAN envelope, then release it only at the end of the picking.in this case a linear interpolation is used to get the final curve.
+4) if the user is not satisfied with the dispersion curve picked can repeat the process starting from the step 2
+5) Let click on SAVE CURVE to keep the result on the workspace.
+6) Let Click PREVIOUS or NEXT button to analyze the next or the previous data.
 
 EXPORTING PICKED CURVES:
 Upon all curves are picked and saved, the button EXPORT ALL CURVES writes a 4-column ASCII file for each data analyzed in the working folder with the following information:
@@ -56,7 +59,7 @@ Upon all curves are picked and saved, the button EXPORT ALL CURVES writes a 4-co
 	3rd. col.	Velocity [km/s]
 	4th. col. 	Picked time [s]
 
-Note: in the case of two curves are picked for the same crosscorrelation, two files will be written, one with the suffix 'a' for the picking done on the anticausal part and 'b' for the casual one (e.g. EXAMPLEa.txt and EXAMPLEb.txt)
+Note: in case of two dispersion curves picked for the same crosscorrelation, two files will be written, one with the suffix 'a' for the picking done on the anticausal part and 'b' for the casual one (e.g. EXAMPLEa.txt and EXAMPLEb.txt)
 
 To cite NDCP:
 Granados, I., Calo, M., and Ramos, V. (2019). NOISY DISPERSION CURVE PICKING (NDCP): a Matlab package for group velocity dispersion picking of seismic surface waves. 
