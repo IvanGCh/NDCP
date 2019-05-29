@@ -9,7 +9,7 @@ function f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel)
     respix=get(0,'ScreenSize');
     fontesc10=round(10*sqrt(respix(3)^2+respix(4)^2)/2202);
     ENVT=ENV(:,length(fcm):-1:1);       % ENVELOPE FOR PERIODS
-    ENVTn=ENVT(length(time):-1:1,:);   % ENVELOPE FOR PERIODS (NON-CAUSAL)
+    ENVTn=ENVT(length(time):-1:1,:);   % ENVELOPE FOR PERIODS (ANTICAUSAL)
     
     %% RESAMPLE OF THE DATA FOR A FASTER CALCULUS
     RESCALE=5;
@@ -54,6 +54,20 @@ function f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel)
     title(['\bf FTAN Dist. ',num2str(dist),' [km]'])
     set(gca,'YTick',1:length(ejeT),'YTickLabel',ejeT)
 	    
+    [TIME,logFF]    =   meshgrid(time,log10(fcm));
+    
+    % TIMEvsPERIOD DIAGRAM (ANTICAUSAL)
+    subplot(3,4,[4,8]),cla,hold off
+    pcolor(TIME,logFF,ENV'),shading interp,hold on,grid on
+    axis([0 maxlagsel min(log10(fcm)) max(log10(fcm))])
+    xlabel('\bf TIME [s]')
+    
+    % TIMEvsPERIOD DIAGRAM (CAUSAL)
+    subplot(3,4,[3,7]),cla,hold off
+    pcolor(TIME,logFF,ENV'),shading interp,hold on,grid on
+    axis([-maxlagsel 0 min(log10(fcm)) max(log10(fcm))])
+    xlabel('\bf TIME [s]')     
+        
     % VELOCITYvsPERIOD DIAGRAM (ANTICAUSAL)
     subplot(3,4,11),cla,hold off,colormap(colorRB)
     pcolor(logTT,VEL,ENVTn'),shading interp

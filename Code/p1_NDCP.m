@@ -54,8 +54,8 @@ fontesc16=round(16*sqrt(respix(3)^2+respix(4)^2)/2202);
 figure
 set(gcf,'color',[1,1,1],'Units','normalized','Units','normalized','Position',[0.2,0.35,0.6,0.4])
 uicontrol('Style','text',      'Units','normalized','Position',[0.03 0.85 0.27 0.1],'String',' SELECT TYPE OF DATA TO ANALYZE:','FontSize',fontesc12)
-uicontrol('Style','pushbutton','Units','normalized','Position',[0.35 0.85 0.2 0.1] ,'String','CROSS-CORRELOGRAM','FontSize',fontesc12,'Callback', {@f_OPEN_CORRELOGRAM} );      
-uicontrol('Style','pushbutton','Units','normalized','Position',[0.6 0.85 0.2 0.1]  ,'String','SEISMIC RECORD','FontSize',fontesc12,'Callback', {@f_OPEN_SEISMIC_RECORD} );
+uicontrol('Style','pushbutton','Units','normalized','Position',[0.35 0.85 0.2 0.1],'String','CROSS-CORRELOGRAM','FontSize',fontesc12,'Callback', {@f_OPEN_CORRELOGRAM} );      
+uicontrol('Style','pushbutton','Units','normalized','Position',[0.6 0.85 0.2 0.1],'String','SEISMIC RECORD','FontSize',fontesc12,'Callback', {@f_OPEN_SEISMIC_RECORD} );
 uicontrol('Style','pushbutton','Units','normalized','Position',[0.85 0.85 0.12 0.1],'String','CONTINUE','FontSize',fontesc12,'Callback','uiresume(gcbf)');
 uiwait(gcf);  
 close
@@ -174,9 +174,9 @@ elseif exist('maxlagsel','var')==0 && strcmp(filetype,'seismic_record') ==1
     maxlagsel=max(time);   
 end
 
-%%
+%% DISPLAYING FTAN FOR PICKING DISPERSION CURVES %%%%%%%%%%%%%%%%%%%%%%%%%%
 fig_princ=figure(1);
-set(gcf,'color',[1,1,1])
+set (gcf,'color',[1,1,1])
 set (gcf, 'Units','normalized','Units','normalized','Position',[0,0.04,1,0.88])
 
 % READ and DISPLAY of selected SAC files in correspondingly folder.
@@ -186,7 +186,7 @@ set (gcf, 'Units','normalized','Units','normalized','Position',[0,0.04,1,0.88])
 %     observed.
 %   - COLOR MAP of FTAN, where the user is allowed to pick dispersion curve
 %           [RED: lower energy]    [BLUE: higher energy]
-% 	- GROUP VELOCITY - PERIOD Diagram & dispersion curve (once is was picked)
+% 	- GROUP VELOCITY - PERIOD Diagram & dispersion curve (once it was picked)
 
 kreg=1;
 uicontrol('Style','pushbutton','Units','normalized','Position',[0.12 0.95 0.13 0.03],'String','PREVIOUS','Callback', {@f_PriorDC} );
@@ -244,7 +244,7 @@ title(['\bf FILE`S NAME: ',char(namesacfile), ],'fontsize',fontesc12)
 uicontrol('Style','text','String',[num2str(kreg) ' / ',num2str(nsac) , '  file' ],'background','w','FontSize',12,'Units','normalized','Position',[0.3 0.95 0.05 0.03])
 
 % STEP where the FTAN process is calculated by f_FTAN_Env function.
-[FTAN,ENV,fcm,fcwidth]    =   f_FTAN_Env(trace,dt,1/Tmax,1/Tmin,filt,fstep,width,filterorder);
+[FTAN,ENV,fcm,fcwidth] = f_FTAN_Env(trace,dt,1/Tmax,1/Tmin,filt,fstep,width,filterorder);
 T=1./fcm;   
 T=T(length(T):-1:1);    
 vel=dist./time;
@@ -252,18 +252,30 @@ vel=dist./time;
 % For each type of the file selected (CROSS-CORRELOGRAM or SEISMIC RECORD),
 % this step includes VISUALIZATION of color-maps diagrams, picked curves,
 % and allows the user for selecting the curve that will be saved and exported in ASCII format.
-if strcmp(filetype,'correlogram')==1 
-    f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
-    uicontrol('Style','text','String',' PART OF CC TO PICK ','background','w','FontSize',fontesc10,'Units','normalized','Position',[0.5 0.955 0.1 0.03])  
-    uicontrol('Style','popup','String', 'CONTINUOUS CAUSAL|CONTINUOUS ANTICAUSAL|SEGMENTED  CAUSAL|SEGMENTED  ANTICAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.6 0.935 0.10 0.05],'Callback', @f_SelectCausal2);   
-    uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position', [0.8,0.96,0.08,0.03]);
-    uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position', [0.89,0.96,0.1,0.03]);
 
-   elseif strcmp(filetype,'seismic_record')==1
+pickopt = 'REPEATED-CLICKS';
+if     strcmp(filetype,'correlogram')==1 
+    f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
+    bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10);   
+    r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);
+    r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
+    bg.Visible = 'on';
+    
+    uicontrol('Style','text','String',' PART OF CC TO PICK ','background','w','FontSize',fontesc10,'Units','normalized','Position',[0.605 0.96 0.1 0.03])  
+    uicontrol('Style','popup','String','CONTINUOUS CAUSAL|CONTINUOUS ANTICAUSAL|SEGMENTED  CAUSAL|SEGMENTED  ANTICAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.61 0.92 0.13 0.05],'Callback', @f_SelectCausal_IC); 
+    
+elseif strcmp(filetype,'seismic_record')==1
     f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt);
-    uicontrol('Style','pushbutton','String', ' PICK DISPERSION CURVE ','FontSize',fontesc10,'Units','normalized','Position', [0.55 0.96 0.12 0.03],'Callback', @f_PickSeisRec);   
-	uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position',[0.7,0.96,0.1,0.03]);
-    uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position',[0.81,0.96,0.15,0.03]);
-end
+    bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10);
+    r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);   
+    r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
+    bg.Visible = 'on';
+
+    uicontrol('Style','pushbutton','String', ' PICK DISPERSION CURVE ','FontSize',fontesc10,'Units','normalized','Position', [0.67 0.95 0.13 0.025],'Callback', @f_PickSeisRec_IC); 
+end  
+
+uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position',[0.83,0.96,0.12,0.025]);
+uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position',[0.83,0.93,0.12,0.025]);
+
 
 

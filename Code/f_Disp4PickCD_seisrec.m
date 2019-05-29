@@ -68,7 +68,7 @@ function f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt)
     pcolor(TIME,logFF,ENV'),shading interp,hold on,grid on
     axis([0 max(time) min(log10(fcm)) max(log10(fcm))])
     set(gca,'YTick',Tlog_tick,'YTickLabel',ejeT)
-    title(['\bf FTAN Dist. ',num2str(dist),' [km]    *** PICK HERE ***'])
+    title(['\bf FTAN Dist. ',num2str(dist),' [km]'])
     xlabel('\bf TIME [s]')
 
     

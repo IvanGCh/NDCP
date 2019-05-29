@@ -86,25 +86,26 @@ function f_NextDC(hObject, eventdata, handles)
     filterorder= evalin('base', 'filterorder');
     [FTAN,ENV,fcm]    =   f_FTAN_Env(trace,dt,1/Tmax,1/Tmin,filt,fstep,width,filterorder);
     T=1./fcm;   T=T(length(T):-1:1);
-
-    if strcmp(filetype,'correlogram')==1 
-        f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
-        
-        uicontrol('Style','text','String',' PART OF CC TO PICK ','background','w','FontSize',fontesc10,'Units','normalized','Position',[0.5 0.955 0.1 0.03])  
-        uicontrol('Style','popup','String', 'CONTINUOUS CAUSAL|CONTINUOUS ANTICAUSAL|SEGMENTED  CAUSAL|SEGMENTED  ANTICAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.6 0.935 0.10 0.05],'Callback', @f_SelectCausal2);   
-
-        uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position', [0.8,0.96,0.08,0.03]);
-        uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position', [0.89,0.96,0.1,0.03]);
     
+    pickopt = 'REPEATED-CLICKS';
+    if     strcmp(filetype,'correlogram')==1 
+        f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
+        bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10); %  pickopt = 'REPEATED-CLICKS';
+        r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        bg.Visible = 'on';
+
     elseif strcmp(filetype,'seismic_record')==1
         f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt);
-        uicontrol('Style','pushbutton','String', ' PICK DISPERSION CURVE ','FontSize',fontesc10,'Units','normalized','Position', [0.55 0.96 0.12 0.03],'Callback', @f_PickSeisRec);   
-        uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position',[0.7,0.96,0.1,0.03]);
-        uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position',[0.81,0.96,0.15,0.03]);
+        bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10);   
+        r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        bg.Visible = 'on';
     end
-        
+    
     assignin('base', 'kreg', kreg)
     assignin('base', 'trace', trace)
     assignin('base', 'dist', dist)
     assignin('base', 'time', time)
+    assignin('base', 'pickopt', pickopt)
 end

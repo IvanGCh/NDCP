@@ -4,7 +4,7 @@ function f_PriorDC(hObject, eventdata, handles)
 %               distance, cut signal (if it is a cross-correlogram), and
 %               perform FTAN.
 %               At the end, on the visualization step, user can select
-%               which part of the FG will be picked (causal or anticausal).
+%               which part of the FG will be picked (causal or non-causal).
 
     nsac= evalin('base', 'nsac');
     kreg= evalin('base', 'kreg');
@@ -15,8 +15,8 @@ function f_PriorDC(hObject, eventdata, handles)
     fontesc12=round(12*sqrt(respix(3)^2+respix(4)^2)/2202);
     
 	if kreg>1
-          kreg=kreg-1;
-        end
+        kreg=kreg-1;
+    end
     
     uicontrol('Style','text','String',[num2str(kreg) ' / ',num2str(nsac) , '  file' ],'background','w','FontSize',12,'Units','normalized','Position',[0.3 0.95 0.05 0.03])  
     
@@ -77,7 +77,8 @@ function f_PriorDC(hObject, eventdata, handles)
         end
     end
     title(['\bf FILE`S NAME: ',char(namesacfile), ],'fontsize',fontesc12)
-    
+       
+    %%
     Tmin= evalin('base', 'Tmin');
     Tmax= evalin('base', 'Tmax');    
     filt= evalin('base', 'filt');
@@ -86,25 +87,27 @@ function f_PriorDC(hObject, eventdata, handles)
     filterorder= evalin('base', 'filterorder');
     [FTAN,ENV,fcm]    =   f_FTAN_Env(trace,dt,1/Tmax,1/Tmin,filt,fstep,width,filterorder);
     T=1./fcm;   T=T(length(T):-1:1);
-
-    if strcmp(filetype,'correlogram')==1 
+    pickopt = 'REPEATED-CLICKS';
+       
+    if     strcmp(filetype,'correlogram')==1 
         f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
-        
-        uicontrol('Style','text','String',' PART OF CC TO PICK ','background','w','FontSize',fontesc10,'Units','normalized','Position',[0.5 0.955 0.1 0.03])  
-        uicontrol('Style','popup','String', 'CONTINUOUS CAUSAL|CONTINUOUS ANTICAUSAL|SEGMENTED  CAUSAL|SEGMENTED  ANTICAUSAL','FontSize',fontesc10,'Units','normalized','Position', [0.6 0.935 0.10 0.05],'Callback', @f_SelectCausal2);   
-
-        uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position', [0.8,0.96,0.08,0.03]);
-        uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position', [0.89,0.96,0.1,0.03]);
+        bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10);   
+        r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        bg.Visible = 'on';
     
     elseif strcmp(filetype,'seismic_record')==1
-        f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt);
-        uicontrol('Style','pushbutton','String', ' PICK DISPERSION CURVE ','FontSize',fontesc10,'Units','normalized','Position', [0.55 0.96 0.12 0.03],'Callback', @f_PickSeisRec);   
-        uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position',[0.7,0.96,0.1,0.03]);
-        uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position',[0.81,0.96,0.15,0.03]);
-    end
-    
+        f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt);  
+        bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10); %  pickopt = 'REPEATED-CLICKS';
+        r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
+        bg.Visible = 'on';
+
+  end  
+
     assignin('base', 'kreg', kreg)
     assignin('base', 'trace', trace)
     assignin('base', 'dist', dist)
     assignin('base', 'time', time)
+    assignin('base', 'pickopt', pickopt)
 end
