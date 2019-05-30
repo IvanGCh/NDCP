@@ -25,7 +25,7 @@ if sacfile.HEADER.STLA ~= -12345 || sacfile.HEADER.EVLA ~= -12345
 end
 
     filetype='seismic_record'; 
-    time=sacfile.HEADER.B:dt:(length(trace)-1)*dt;
+    time=sacfile.HEADER.B:dt:sacfile.HEADER.B+((length(trace)-1)*dt);
     
     axes('Position',[0.07,0.1,0.9,0.7])
     plot(time,trace./max(abs(trace)),'k')
