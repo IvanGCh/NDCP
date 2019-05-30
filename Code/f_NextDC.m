@@ -58,7 +58,7 @@ function f_NextDC(hObject, eventdata, handles)
     
     elseif strcmp(filetype,'seismic_record')==1        
         maxlagsel=traceHDR.E;
-        time=traceHDR.B:dt:(length(trace)-1)*dt;
+        time=traceHDR.B:dt:traceHDR.B+((length(trace)-1)*dt);
     end
     
     subplot(3,4,[3,7]),cla
