@@ -24,8 +24,8 @@ if sacfile.HEADER.STLA ~= -12345 || sacfile.HEADER.EVLA ~= -12345
     dist=dist*1.852;    % Dist. [NAUTICAL MILES] = 1.852 Dist. [KILOMETERS]
 end
 
-    filetype='seismic_record';   
-    time=sacfile.HEADER.B:dt:sacfile.HEADER.E;
+    filetype='seismic_record'; 
+    time=sacfile.HEADER.B:dt:(length(trace)-1)*dt;
     
     axes('Position',[0.07,0.1,0.9,0.7])
     plot(time,trace./max(abs(trace)),'k')
