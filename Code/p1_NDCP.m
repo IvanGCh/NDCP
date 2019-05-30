@@ -13,7 +13,7 @@
 %%%        https://github.com/IvanGCh/NDCP                                %%%
 %%%                                                                       %%%
 %%%    This code is only for research and teaching proposes. If you plan  %%%
-%%%    to use it for business purposes please contact the author.         %%%
+%%%    to use it for business purposes lease contact the author.         %%%
 %%%                                                                       %%%
 %%%                                                                       %%%
 %%%    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,    %%%
@@ -137,10 +137,14 @@ elseif  dist>=80 && dist<150
     defFTAN=[1,25,0.025,0.07,8];
     minvel=0.5;
     maxvel=4.5;
-elseif  dist>150
+elseif  dist>=150 && dist<500 
     defFTAN=[3,80,0.025,0.07,8];
     minvel=1;
     maxvel=6;
+elseif  dist>=500
+    defFTAN=[5,90,0.03,0.07,8];
+    minvel=2.5;
+    maxvel=7;
 end
 
 uicontrol('Style','text','String',' FTAN PARAMETERS ','FontSize',fontesc12,'Units','normalized','Position',[0.05,0.8,0.25,0.035])  
@@ -226,7 +230,7 @@ elseif strcmp(filetype,'seismic_record')==1
     pickedcurves=cell(nsac,1);
     trace=f_Taper(trace,0.05);
     maxlag=length(trace)*dt;
-	time=traceHDR.B:dt:traceHDR.E;
+    time=traceHDR.B:dt:(length(trace)-1)*dt;
 end
 
 subplot(3,4,9:10),cla
@@ -276,6 +280,5 @@ end
 
 uicontrol('Style','pushbutton','String','SAVE CURVE','FontSize',fontesc10,'Callback',{@f_SaveDC},'Units', 'normalized','Position',[0.83,0.96,0.12,0.025]);
 uicontrol('Style','pushbutton','String','EXPORT ALL CURVES','FontSize',fontesc10,'Callback',{@f_ExportDC},'Units', 'normalized','Position',[0.83,0.93,0.12,0.025]);
-
 
 
