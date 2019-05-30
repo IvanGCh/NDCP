@@ -14,7 +14,7 @@ function f_NextDC(hObject, eventdata, handles)
     fontesc10=round(10*sqrt(respix(3)^2+respix(4)^2)/2202);    
     fontesc12=round(12*sqrt(respix(3)^2+respix(4)^2)/2202);
 
-	if kreg<nsac
+    if kreg<nsac
         kreg=kreg+1;
     end
     
@@ -58,7 +58,7 @@ function f_NextDC(hObject, eventdata, handles)
     
     elseif strcmp(filetype,'seismic_record')==1        
         maxlagsel=traceHDR.E;
-        time=traceHDR.B:dt:traceHDR.E;
+        time=traceHDR.B:dt:(length(trace)-1)*dt;
     end
     
     subplot(3,4,[3,7]),cla
