@@ -1,7 +1,7 @@
 function f_OPEN_SEISMIC_RECORD(hObj,event)
 % f_OPEN_SEISMIC_RECORD: allow the user to select the folder that contain 
 % SAC files with the seismic records for certain earthquakes.
-% As is described in GRANADOS et al., 2018, coordinate headers of STATION
+% As is described in GRANADOS et al., 2019, coordinate headers of STATION
 % and EVENT (station A and epicenter) must be in each file, for an
 % automatic calculation of DISTANCE and proposal FTAN parameters.
 %
