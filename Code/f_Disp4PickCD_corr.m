@@ -69,7 +69,7 @@ function f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel)
     xlabel('\bf TIME [s]')     
         
     % VELOCITYvsPERIOD DIAGRAM (ANTICAUSAL)
-    subplot(3,4,11),cla,hold off,colormap(colorRB)
+    subplot(3,4,11),cla,hold off,colormap(jet)%colormap(colorRB)
     pcolor(logTT,VEL,ENVTn'),shading interp
     set(gca,'XTick',Tlog_tick,'XTickLabel',ejeT2,'fontsize',fontesc10)
     xlabel('\bf PERIOD [s]'),ylabel('\bf GROUP VELOCITY [km/s]')
@@ -87,18 +87,3 @@ function f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel)
     assignin('base', 'Tlog_tick', Tlog_tick)
     assignin('base', 'ejeT2', ejeT2)
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
