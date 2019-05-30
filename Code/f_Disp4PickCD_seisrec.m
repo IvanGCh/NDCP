@@ -56,7 +56,7 @@ function f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt)
     set(gca,'YTick',1:length(ejeT),'YTickLabel',ejeT)
 	
     % VELOCITYvsPERIOD DIAGRAM 
-    subplot(3,4,11),hold off,colormap(colorRB)
+    subplot(3,4,11),hold off,colormap(jet)%colormap(colorRB)
     pcolor(logTT,VEL,ENVT'),shading interp
     axis([min(log10(T)) max(log10(T)) minvel maxvel])
     set(gca,'XTick',Tlog_tick,'XTickLabel',ejeT2,'fontsize',fontesc10)
