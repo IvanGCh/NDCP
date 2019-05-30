@@ -230,7 +230,7 @@ elseif strcmp(filetype,'seismic_record')==1
     pickedcurves=cell(nsac,1);
     trace=f_Taper(trace,0.05);
     maxlag=length(trace)*dt;
-    time=traceHDR.B:dt:(length(trace)-1)*dt;
+    time=traceHDR.B:dt:traceHDR.B+((length(trace)-1)*dt);
 end
 
 subplot(3,4,9:10),cla
