@@ -48,10 +48,4 @@ function f_ExportDC(hObj,event)
         
     end
     
-    close
-    
 end
-
-
-
-
