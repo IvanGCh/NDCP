@@ -57,19 +57,19 @@ function f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel)
     [TIME,logFF]    =   meshgrid(time,log10(fcm));
     
     % TIMEvsPERIOD DIAGRAM (ANTICAUSAL)
-    subplot(3,4,[4,8]),cla,hold off
+    subplot(3,4,[4,8]),cla,hold off,colormap(colorRB)
     pcolor(TIME,logFF,ENV'),shading interp,hold on,grid on
     axis([0 maxlagsel min(log10(fcm)) max(log10(fcm))])
     xlabel('\bf TIME [s]')
     
     % TIMEvsPERIOD DIAGRAM (CAUSAL)
-    subplot(3,4,[3,7]),cla,hold off
+    subplot(3,4,[3,7]),cla,hold off,colormap(colorRB)
     pcolor(TIME,logFF,ENV'),shading interp,hold on,grid on
     axis([-maxlagsel 0 min(log10(fcm)) max(log10(fcm))])
     xlabel('\bf TIME [s]')     
         
     % VELOCITYvsPERIOD DIAGRAM (ANTICAUSAL)
-    subplot(3,4,11),cla,hold off,colormap(jet)%colormap(colorRB)
+    subplot(3,4,11),cla,hold off,colormap(colorRB)
     pcolor(logTT,VEL,ENVTn'),shading interp
     set(gca,'XTick',Tlog_tick,'XTickLabel',ejeT2,'fontsize',fontesc10)
     xlabel('\bf PERIOD [s]'),ylabel('\bf GROUP VELOCITY [km/s]')
@@ -77,7 +77,7 @@ function f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel)
     axis([min(log10(T)) max(log10(T)) minvel maxvel])
     
     % VELOCITYvsPERIOD DIAGRAM (CAUSAL)  
-    subplot(3,4,12),cla,hold off
+    subplot(3,4,12),cla,hold off,colormap(colorRB)
     pcolor(logTT,VEL,ENVT'),shading interp
     set(gca,'XTick',Tlog_tick,'XTickLabel',ejeT2,'fontsize',fontesc10)
     xlabel('\bf PERIOD [s]'),ylabel('\bf GROUP VELOCITY [km/s]')
