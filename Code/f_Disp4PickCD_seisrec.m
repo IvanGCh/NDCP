@@ -56,7 +56,7 @@ function f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt)
     set(gca,'YTick',1:length(ejeT),'YTickLabel',ejeT)
 	
     % VELOCITYvsPERIOD DIAGRAM 
-    subplot(3,4,11),hold off,colormap(jet)%colormap(colorRB)
+    subplot(3,4,11),hold off,colormap(colorRB)
     pcolor(logTT,VEL,ENVT'),shading interp
     axis([min(log10(T)) max(log10(T)) minvel maxvel])
     set(gca,'XTick',Tlog_tick,'XTickLabel',ejeT2,'fontsize',fontesc10)
@@ -64,7 +64,7 @@ function f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt)
     title('\bf DISPERSION CURVE')
        
     % FTAN (COLORMAP)... FOR A FTAN-like PICKING
-    subplot(3,4,[3:4,7:8]),hold off
+    subplot(3,4,[3:4,7:8]),hold off,colormap(colorRB)
     pcolor(TIME,logFF,ENV'),shading interp,hold on,grid on
     axis([0 max(time) min(log10(fcm)) max(log10(fcm))])
     set(gca,'YTick',Tlog_tick,'YTickLabel',ejeT)
