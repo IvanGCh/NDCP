@@ -91,19 +91,9 @@ function f_PriorDC(hObject, eventdata, handles)
        
     if     strcmp(filetype,'correlogram')==1 
         f_Disp4PickCD_corr(time,fcm,T,FTAN,ENV,trace,dist,dt,maxlagsel);
-        bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10);   
-        r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);
-        r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
-        bg.Visible = 'on';
-    
     elseif strcmp(filetype,'seismic_record')==1
         f_Disp4PickCD_seisrec(time,fcm,T,FTAN,ENV,trace,dist,dt);  
-        bg = uibuttongroup('Visible','off','Title','PICKING MODE','Position',[0.505 0.93 0.09 0.067],'SelectionChangedFcn',@f_bselection_corr,'FontSize',fontesc10); %  pickopt = 'REPEATED-CLICKS';
-        r1 = uicontrol(bg,'Style','radiobutton','String','REPEATED-CLICKS','Position',[10 22 150 16],'HandleVisibility','off','FontSize',fontesc10);
-        r2 = uicontrol(bg,'Style','radiobutton','String','CLICK&HOLD','Position',[10 3 150 16],'HandleVisibility','off','FontSize',fontesc10);
-        bg.Visible = 'on';
-
-  end  
+    end  
 
     assignin('base', 'kreg', kreg)
     assignin('base', 'trace', trace)
