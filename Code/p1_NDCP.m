@@ -140,11 +140,11 @@ elseif  dist>=80 && dist<150
 elseif  dist>=150 && dist<500 
     defFTAN=[3,80,0.025,0.07,8];
     minvel=1;
-    maxvel=6;
+    maxvel=5;
 elseif  dist>=500
-    defFTAN=[5,90,0.03,0.07,8];
-    minvel=2.5;
-    maxvel=7;
+    defFTAN=[5,90,0.03,0.05,8];
+    minvel=2;
+    maxvel=5.5;
 end
 
 uicontrol('Style','text','String',' FTAN PARAMETERS ','FontSize',fontesc12,'Units','normalized','Position',[0.05,0.8,0.25,0.035])  
