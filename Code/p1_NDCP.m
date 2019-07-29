@@ -62,19 +62,19 @@ close
 
 % After selection of a file in certain folder, NDCP will read all the files
 % contained here.
-sacfilespre1=dir([pathsac,'*.sac']);    
-sacfilespre2=dir([pathsac,'*.SAC']);
-sacfilespre=[sacfilespre1;sacfilespre2];
+sacfilespre=dir(pathsac);
 nsac=length(sacfilespre);   
 sacfiles={};    nnn=0;
 for ksac=1:nsac
-    fileksac=sacfilespre(ksac).name;
-    if strcmp(fileksac(1),'.')==0
-        nnn=nnn+1;
-        sacfiles{nnn,1}=char(fileksac);
+    fileksac=sacfilespre(ksac).name;    nchar=length(char(fileksac));
+    if nchar>2 || strcmp(fileksac(1),'.')==0
+        if strcmp(fileksac(nchar-2:nchar),'sac')==1 || strcmp(fileksac(nchar-2:nchar),'SAC')==1
+            nnn=nnn+1;
+            sacfiles{nnn,1}=char(fileksac);
+        end
     end
 end
-clear sacfilespre sacfilespre1 sacfilespre2 ksac fileksac nnn
+clear sacfilespre ksac fileksac nnn nchar
 sacfiles = struct('name',sacfiles);
 nsac=length(sacfiles);   
 figure,set(gcf,'color',[1,1,1]),set (gcf, 'Units','normalized','Units','normalized','Position',[0.45,0.5,0.2,0.05])
